@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TradePulse — Finance & Crypto Template</title>
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --accent:#00d4ff; --muted:#95a3b8; --glass: rgba(255,255,255,0.03);
+      --glass-2: rgba(255,255,255,0.02);
+      --success:#22c55e; --danger:#ff6b6b;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; background:linear-gradient(180deg,#071021 0%, #071427 100%); color:#e6eef6; -webkit-font-smoothing:antialiased}
+    .container{max-width:1100px;margin:32px auto;padding:0 20px}
+
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#6ee7b7);display:flex;align-items:center;justify-content:center;color:#022; font-weight:700}
+    nav a{color:var(--muted);margin-left:18px;text-decoration:none}
+    nav a.cta{background:var(--accent);color:#022;padding:8px 12px;border-radius:8px;margin-left:22px}
+
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:18px}
+    .hero-card{background:linear-gradient(180deg,var(--glass),transparent);border:1px solid rgba(255,255,255,0.04);padding:26px;border-radius:16px}
+    h1{font-size:32px;margin:0 0 8px}
+    p.lead{color:var(--muted);margin:0 0 18px}
+    .cta-row{display:flex;gap:12px;margin-top:12px}
+    .btn{padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:600}
+    .btn-primary{background:var(--accent);color:#022}
+    .btn-outline{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    .features{display:flex;gap:12px;margin-top:18px}
+    .feature{background:var(--card);padding:12px;border-radius:10px;flex:1}
+    .ticker{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:10px;border-radius:8px;display:flex;gap:12px;overflow:auto}
+    .tick{min-width:140px;padding:8px;border-radius:8px;background:linear-gradient(180deg,var(--glass-2),transparent);border:1px solid rgba(255,255,255,0.02)}
+
+    .chart-wrap{background:var(--card);padding:18px;border-radius:12px;margin-top:18px}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .market-card{background:linear-gradient(180deg,var(--card),#071420);padding:14px;border-radius:12px}
+
+    footer{margin-top:42px;padding:24px 0;color:var(--muted);text-align:center}
+
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr;}
+      .cards{grid-template-columns:1fr}
+    }
+
+    /* small utilities */
+    .muted{color:var(--muted)}
+    .small{font-size:13px}
+    .price-up{color:var(--success)}
+    .price-down{color:var(--danger)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">TP</div>
+        <div>
+          <div style="font-weight:700">TradePulse</div>
+          <div class="small muted">Analytics • Signals • Market data</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#markets">Markets</a>
+        <a href="#charts">Charts</a>
+        <a href="#about">About</a>
+        <a class="cta" href="#signup">Get Started</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div>
+        <div class="hero-card">
+          <h1>Real-time look for Crypto, Forex & Stocks</h1>
+          <p class="lead">A lightweight starter template for traders — price tickers, mini market cards and a sample interactive chart. Works perfectly on GitHub Pages.</p>
+          <div class="cta-row">
+            <button class="btn btn-primary" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">Start Free</button>
+            <button class="btn btn-outline" onclick="alert('Download sample data')">Download CSV</button>
+          </div>
+
+          <div class="features" style="margin-top:18px">
+            <div class="feature">
+              <div style="font-weight:700">Signals</div>
+              <div class="small muted">Customizable signal badges & watchlists</div>
+            </div>
+            <div class="feature">
+              <div style="font-weight:700">Responsive Charts</div>
+              <div class="small muted">Interactive chart using Chart.js (CDN)</div>
+            </div>
+            <div class="feature">
+              <div style="font-weight:700">Portfolio Preview</div>
+              <div class="small muted">Simple P&L blocks & risk metrics</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-wrap" id="charts">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="font-weight:700">BTC/USDT — 1H</div>
+            <div class="muted small">Simulated live demo</div>
+          </div>
+          <canvas id="priceChart" style="width:100%;height:260px;margin-top:12px"></canvas>
+        </div>
+
+      </div>
+
+      <aside>
+        <div class="hero-card">
+          <div style="font-weight:700;margin-bottom:8px">Market Ticker</div>
+          <div class="ticker" id="ticker">
+            <!-- tickers injected by JS -->
+          </div>
+
+          <div style="margin-top:12px">
+            <div style="display:flex;gap:8px;align-items:center;justify-content:space-between">
+              <div>
+                <div class="small muted">Portfolio Value</div>
+                <div style="font-weight:700;font-size:20px">$12,430.25</div>
+              </div>
+              <div>
+                <div class="small muted">24h Change</div>
+                <div class="price-up" style="font-weight:700">+3.42%</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px">
+            <div style="font-weight:700;margin-bottom:8px">Quick Actions</div>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-outline" onclick="alert('Buy demo')">Buy</button>
+              <button class="btn btn-outline" onclick="alert('Sell demo')">Sell</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card" style="margin-top:12px">
+          <div style="font-weight:700">Market Snapshot</div>
+          <div class="cards" style="margin-top:12px">
+            <div class="market-card">
+              <div class="small muted">BTC</div>
+              <div style="font-weight:700">${{BTC}}</div>
+              <div class="small price-up">+2.8%</div>
+            </div>
+            <div class="market-card">
+              <div class="small muted">EUR/USD</div>
+              <div style="font-weight:700">1.0824</div>
+              <div class="small price-down">-0.12%</div>
+            </div>
+            <div class="market-card">
+              <div class="small muted">ETH</div>
+              <div style="font-weight:700">${{ETH}}</div>
+              <div class="small price-up">+1.9%</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="markets" style="margin-top:26px">
+      <div class="hero-card">
+        <h3 style="margin:0 0 6px">Markets & Plans</h3>
+        <p class="small muted">Choose a plan that fits — starter templates are free and upgradeable to paid data feeds later.</p>
+        <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+          <div style="background:linear-gradient(180deg,#071428, #061020);padding:14px;border-radius:12px;min-width:220px;flex:1">
+            <div style="font-weight:700">Starter (Free)</div>
+            <div class="small muted">Simulated prices • Basic charts • GitHub Pages</div>
+            <div style="margin-top:8px;font-weight:700">$0 / forever</div>
+          </div>
+          <div style="background:linear-gradient(180deg,#071428, #061020);padding:14px;border-radius:12px;min-width:220px;flex:1">
+            <div style="font-weight:700">Pro</div>
+            <div class="small muted">Live API integration • Signals • Priority support</div>
+            <div style="margin-top:8px;font-weight:700">$19 / month</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="signup" style="margin-top:18px">
+      <div class="hero-card">
+        <h3 style="margin:0 0 8px">Get a copy of this template</h3>
+        <p class="small muted">To launch on GitHub Pages: download this file as <code>index.html</code>, push to a repo named <code>username.github.io</code> and you're live.</p>
+        <form onsubmit="event.preventDefault();alert('Thanks — mock signup!');">
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <input type="email" placeholder="you@mail.com" required style="flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" />
+            <button class="btn btn-primary">Send me template</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      © TradePulse — Starter template • Built for learning & demos
+    </footer>
+  </div>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Simulated market data generator
+    function randWalk(length, start, vol){
+      const a=[start];
+      for(let i=1;i<length;i++){
+        const change=(Math.random()-0.48)*vol;
+        a.push(Math.max(0.1, +(a[i-1]*(1+change)).toFixed(4)));
+      }
+      return a;
+    }
+
+    // Render chart
+    const ctx = document.getElementById('priceChart').getContext('2d');
+    const labels = Array.from({length:40},(_,i)=>i-39).map(i=> (i*1)+' min');
+    const dataVals = randWalk(40, 46000, 0.005);
+    const chart = new Chart(ctx, {
+      type:'line',
+      data:{labels, datasets:[{label:'BTC/USDT',data:dataVals,fill:true,tension:0.2,borderWidth:2}]},
+      options:{plugins:{legend:{display:false}},scales:{y:{grid:{display:false}},x:{grid:{display:false}}}}
+    });
+
+    // Ticker sample symbols
+    const symbols = [
+      {s:'BTC/USDT',p:46230,chg:+2.8},
+      {s:'ETH/USDT',p:3300,chg:+1.9},
+      {s:'XRP/USDT',p:0.62,chg:-0.4},
+      {s:'EUR/USD',p:1.0824,chg:-0.12},
+      {s:'GBP/USD',p:1.276,chg:+0.06}
+    ];
+
+    function renderTicker(){
+      const wrap = document.getElementById('ticker');
+      wrap.innerHTML='';
+      symbols.forEach(sym=>{
+        const el = document.createElement('div'); el.className='tick';
+        el.innerHTML = `<div style=\"font-weight:700\">${sym.s}</div><div class=\"small muted\">${sym.p}</div><div class=\"small ${sym.chg>=0? 'price-up':'price-down'}\">${sym.chg>=0?'+':''}${sym.chg}%</div>`;
+        wrap.appendChild(el);
+      });
+    }
+    renderTicker();
+
+    // Simulate live updates every 4s
+    setInterval(()=>{
+      // modify values a bit
+      symbols.forEach(sym=>{
+        const drift = (Math.random()-0.48)*(sym.p*0.002);
+        sym.p = +(sym.p + drift).toFixed(4);
+        sym.chg = +((Math.random()-0.45)*3).toFixed(2);
+      });
+      renderTicker();
+
+      // push new value to chart
+      const next = Math.max(0.1, +(chart.data.datasets[0].data.slice(-1)[0] * (1 + (Math.random()-0.5)*0.006)).toFixed(4));
+      chart.data.datasets[0].data.push(next);
+      chart.data.datasets[0].data.shift();
+      chart.update('none');
+    },4000);
+  </script>
+</body>
+</html>
