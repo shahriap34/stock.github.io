@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shahriyar Trading LLC</title>
+<style>
+    :root{
+        --bg:#000;
+        --card:#0f0f0f;
+        --gold:#d4af37;
+        --text:#fff;
+    }
+    *{box-sizing:border-box}
+    body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        background-color: var(--bg);
+        color: var(--text);
+        -webkit-font-smoothing:antialiased;
+        -moz-osx-font-smoothing:grayscale;
+        scroll-behavior: smooth;
+        line-height:1.6;
+    }
+    header {
+        background: rgba(0,0,0,0.85);
+        padding: 18px 32px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid var(--gold);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+    .brand {
+        display:flex;
+        align-items:center;
+        gap:12px;
+    }
+    .logo {
+        width:46px;
+        height:46px;
+        border-radius:8px;
+        background:linear-gradient(135deg,#111 0%, #222 100%);
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:var(--gold);
+        font-weight:700;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.6);
+        border:1px solid rgba(212,175,55,0.15);
+    }
+    header h1{font-size:1rem;color:var(--gold);margin:0}
+    nav a {
+        color: var(--text);
+        text-decoration: none;
+        margin-left: 20px;
+        font-weight: 600;
+        font-size:0.95rem;
+        opacity:0.95;
+        transition: color 0.25s, transform 0.25s;
+    }
+    nav a:hover { color: var(--gold); transform: translateY(-2px); }
+
+    .hero {
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1600&auto=format&fit=crop') no-repeat center center/cover;
+        min-height: 78vh;
+        display: flex;
+        align-items: center;
+        padding: 48px 24px;
+    }
+    .container { max-width:1100px; margin:0 auto; width:100% }
+    .hero-inner {
+        display: grid;
+        grid-template-columns: 1fr 420px;
+        gap:32px;
+        align-items:center;
+    }
+    .hero h2 {
+        font-size: clamp(1.6rem, 3.6vw, 2.8rem);
+        color: var(--gold);
+        margin:0 0 12px 0;
+        letter-spacing: -0.02em;
+    }
+    .hero p { color: #e8e6e1; margin:0 0 20px 0; max-width:640px; }
+    .btn {
+        display:inline-block;
+        background:var(--gold);
+        color:#000;
+        padding:12px 20px;
+        border-radius:8px;
+        text-decoration:none;
+        font-weight:700;
+        box-shadow: 0 6px 18px rgba(212,175,55,0.12);
+    }
+    .hero-card {
+        background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+        border:1px solid rgba(212,175,55,0.08);
+        padding:20px;
+        border-radius:12px;
+        color: #e9e6e2;
+    }
+    section { padding: 64px 24px; }
+    h2.section-title { color: var(--gold); margin:0 0 10px 0; font-size:1.4rem }
+    p.lead { color:#dcd8d3; max-width:900px; margin:8px 0 0 0 }
+
+    .services {
+        display:grid;
+        grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+        gap:20px;
+        margin-top:24px;
+    }
+    .card {
+        background: var(--card);
+        padding:20px;
+        border-radius:12px;
+        border:1px solid rgba(255,255,255,0.03);
+        transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 8px 30px rgba(0,0,0,0.6); border-color: rgba(212,175,55,0.12) }
+    .card h3{margin:0 0 8px 0; color:var(--gold)}
+    .card p{margin:0;color:#d0cbc3;font-size:0.95rem}
+
+    .testimonials {
+        display:grid;
+        grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+        gap:18px;
+        margin-top:18px;
+    }
+    .test {
+        background: rgba(255,255,255,0.02);
+        padding:18px;
+        border-radius:10px;
+        border:1px solid rgba(255,255,255,0.02);
+    }
+
+    #contact .contact-grid {
+        display:grid;
+        grid-template-columns: 1fr 320px;
+        gap:24px;
+        align-items:start;
+    }
+    .contact-card {
+        background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+        padding:20px;border-radius:12px;border:1px solid rgba(212,175,55,0.06)
+    }
+    .footer {
+        padding:20px 24px;
+        text-align:center;
+        border-top:2px solid var(--gold);
+        color:#bfb8a8;
+    }
+
+    /* Responsive */
+    @media (max-width:900px){
+        .hero-inner{ grid-template-columns: 1fr; }
+        #contact .contact-grid{ grid-template-columns: 1fr; }
+        header { padding:14px 18px }
+    }
+</style>
+</head>
+<body>
+<header>
+    <div class="brand container" style="justify-content:space-between;gap:18px">
+        <div style="display:flex;align-items:center;gap:12px">
+            <div class="logo">ST</div>
+            <div>
+                <h1>Shahriyar Trading LLC</h1>
+                <div style="font-size:0.8rem;color:#cfc7b7">Investing Guidelines</div>
+            </div>
+        </div>
+        <nav style="display:flex;align-items:center">
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="container hero-inner">
+            <div>
+                <h2>Your Path to Smart Investing</h2>
+                <p>Shahriyar Trading LLC provides clear, actionable investing guidelines designed for both new and experienced investors. Learn to plan, manage risk and analyze markets with confidence.</p>
+                <div style="margin-top:18px">
+                    <a class="btn" href="#contact">Get Started</a>
+                </div>
+            </div>
+            <div class="hero-card">
+                <h3 style="margin-top:0;color:var(--gold)">Quick Guide</h3>
+                <p style="margin:8px 0 0 0">1. Define your investment goals.<br>2. Choose asset allocation.<br>3. Implement risk management.<br>4. Regularly review & rebalance.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <p class="lead">At Shahriyar Trading LLC, our mission is to empower investors with practical guidelines and research-backed strategies. We focus on long-term growth, disciplined risk control, and clear education.</p>
+        </div>
+    </section>
+
+    <section id="services" style="padding-top:32px;padding-bottom:32px">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services">
+                <div class="card">
+                    <h3>Investment Planning</h3>
+                    <p>Customized plans based on your goals, horizon and risk tolerance.</p>
+                </div>
+                <div class="card">
+                    <h3>Risk Management</h3>
+                    <p>Position sizing, stop-loss frameworks and diversification methods.</p>
+                </div>
+                <div class="card">
+                    <h3>Market Analysis</h3>
+                    <p>Weekly market insights, trend analysis and portfolio recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Testimonials</h2>
+            <div class="testimonials">
+                <div class="test">
+                    <strong>Rafiq H.</strong>
+                    <p style="margin-top:8px">"Their investing guide helped me build a clear plan — simple and effective."</p>
+                </div>
+                <div class="test">
+                    <strong>Sumaiya K.</strong>
+                    <p style="margin-top:8px">"Professional advice and easy-to-follow steps. Highly recommended."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-grid">
+                <div>
+                    <p class="lead">Have questions or ready to improve your investing approach? Send us a message or use the contact details.</p>
+                    <div style="margin-top:14px" class="contact-card">
+                        <p style="margin:0"><strong>Email:</strong> info@shahriyartrading.com</p>
+                        <p style="margin:6px 0 0 0"><strong>Phone:</strong> +880 1234 567890</p>
+                        <p style="margin:6px 0 0 0"><strong>Address:</strong> Dhaka, Bangladesh</p>
+                    </div>
+                </div>
+                <div>
+                    <form class="contact-card" onsubmit="event.preventDefault(); alert('Thank you — we will contact you soon.');">
+                        <label style="display:block;margin-bottom:8px"><strong>Your Name</strong></label>
+                        <input required type="text" name="name" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:#0b0b0b;color:#fff" />
+                        <label style="display:block;margin:12px 0 8px 0"><strong>Email</strong></label>
+                        <input required type="email" name="email" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:#0b0b0b;color:#fff" />
+                        <label style="display:block;margin:12px 0 8px 0"><strong>Message</strong></label>
+                        <textarea required name="message" rows="4" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:#0b0b0b;color:#fff"></textarea>
+                        <div style="margin-top:12px;text-align:right">
+                            <button type="submit" class="btn" style="padding:10px 16px;border-radius:8px">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    &copy; 2025 Shahriyar Trading LLC. All Rights Reserved.
+</footer>
+
+</body>
+</html>
